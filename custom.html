@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Elements</title>
+</head>
+<body>
+  <h1>Custom Elements</h1>
+  <blink-button>
+    <img src="assets/img/photo_mario.png" alt="">
+  </blink-button>
+  <script>
+    var proto = Object.create(HTMLButtonElement.prototype);
+    proto.opacity = 0;
+    proto.direction = 'up';
+    proto.blinkInterval = 0;
+    proto.createdCallback = function(){
+      this.blinkInterval = setInterval(function(scope){
+        if (scope.direction == 'up'){
+          scope.opacity += 0.1;
+          if (scope.opacity >= 1){
+            scope.direction = 'down';
+          }
+        } else {
+          scope.opacity -= 0.1;
+          if (scope.opacity <= 0){
+            scope.direction = 'up';
+          }
+        }
+
+        scope.children[0].style.opacity = scope.opacity;
+      }, 50, this);
+    };
+
+    document.registerElement('blink-button', {
+      prototype: proto
+    });
+
+    document.querySelector('blink-button').addEventListener('click', function(e){
+      alert('It\'s-a-me, Mario!');
+    });
+  </script>
+  <hr>
+  <a href="index.html">Menu Principal</a> | 
+  <a href="shadow.html">&lt; &lt; Shadow DOM</a>
+</body>
+</html>

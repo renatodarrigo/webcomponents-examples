@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML Templates</title>
+</head>
+<body>
+  <h1>Lista de Personagens</h1>
+  <table id="users" border="1" style="width: 600px;">
+    <thead>
+      <tr>
+        <th style="width: 200px">Foto</th>
+        <th>Nome</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- TEMPLATE SERÁ REPLICADO AQUI -->
+    </tbody>
+  </table>
+  <hr>
+  <a href="index.html">Menu Principal</a> | 
+  <a href="imports.html">HTML Imports &gt;&gt;</a>
+
+  <template id="userTemplate">
+    <tr>
+      <td class="userImg" style="text-align: center;"><img></td>
+      <td class="userName" style="text-align: center;">NAME</td>
+    </tr>
+  </template>
+
+  <script>
+  var data = [
+    {img: 'assets/img/photo_mario.png', name: 'Mario'},
+    {img: 'assets/img/photo_sonic.png', name: 'Sonic'},
+    {img: 'assets/img/photo_pacman.png', name: 'Pac-man'}
+  ];
+
+  var template = document.querySelector('#userTemplate');
+  var userTableBody = document.querySelector('#users tbody');
+  for (var i=0; i<data.length; i++){
+    var user = data[i];
+    var userRow = template.content.cloneNode(true);
+    var userImg = userRow.querySelector('.userImg img');
+    var userNameCell = userRow.querySelector('.userName');
+
+    userImg.src = user.img;
+    userNameCell.innerHTML = user.name;
+
+    userTableBody.appendChild(userRow);
+  }
+  </script>
+  
+</body>
+</html>

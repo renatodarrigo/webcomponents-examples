@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML Imports</title>
+  <link rel="import" id="import-hello" href="assets/html-imports/hello.html">
+</head>
+<body>
+  <h1>Diz oi pra gente, import!</h1>
+  <div id="import-area"></div>
+  <hr>
+  <a href="index.html">Menu Principal</a> | 
+  <a href="templates.html">&lt; &lt; HTML Templates</a> | 
+  <a href="shadow.html">Shadow DOM &gt;&gt;</a>
+
+  <script>
+    var link = document.querySelector('#import-hello');
+    
+    var importDOM = link.import;
+    console.log('importDOM', importDOM);
+   
+    var importContent = importDOM.body.cloneNode(true).querySelector('h2');
+    console.log('importContent', importContent);
+    
+    var importArea = document.querySelector('#import-area');
+    importArea.appendChild(importContent);
+  </script>
+</body>
+</html>

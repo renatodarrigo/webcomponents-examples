@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shadow DOM</title>
+</head>
+<body>
+  <h1>Shadow DOM</h1>
+  <p>Clique para exibir um console.log() com os childNodes do botão.</p>
+  <button>ESTE BOTÃO NÃO TEM IMAGEM!</button> &lt;-- ME INSPECIONE!!
+  <hr>
+  <a href="index.html">Menu Principal</a> | 
+  <a href="imports.html">&lt; &lt; HTML Imports</a> | 
+  <a href="custom.html">Custom Elements &gt;&gt;</a>
+
+  <script>
+    var btn = document.querySelector('button');
+    var shadowRoot = btn.createShadowRoot();
+    var img = document.createElement('img');
+    img.src = 'assets/img/photo_mario.png';
+    shadowRoot.appendChild(img);
+
+    btn.addEventListener('click', function(e){
+      console.log(this.childNodes);
+    });
+  </script>
+</body>
+</html>
